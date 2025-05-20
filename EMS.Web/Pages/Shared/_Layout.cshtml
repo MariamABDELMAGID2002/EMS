@@ -1,50 +1,415 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EMS.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/EMS.Web.styles.css" asp-append-version="true" />
+
+    
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"] - Events</title>
+    <meta name="description" content="Evente - Conference and Event HTML Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo/favicon.png">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/css/flaticon_mycollection.css">
+    <link rel="stylesheet" href="/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/css/odometer.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">EMS.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    
+
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- Preloader End -->
+    <!-- Scroll-top -->
+    <button class="scroll__top scroll-to-target" data-target="html">
+        <i class="fa-sharp fa-regular fa-arrow-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
+    <!-- header-search -->
+    <div class="search__popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search__wrapper">
+                        <div class="search__close">
+                            <button type="button" class="search-close-btn">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                    <path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search__form">
+                            <form action="#">
+                                <div class="search__input">
+                                    <input class="search-input-field" type="text" placeholder="Type keywords here">
+                                    <span class="search-focus-border"></span>
+                                    <button type="submit">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
+    <div class="search-popup-overlay"></div>
+    <!-- header-search-end -->
+    <!-- cart mini area start -->
+    <div class="cartmini__area">
+        <div class="cartmini__wrapper d-flex justify-content-between flex-column">
+            <div class="cartmini__top-wrapper ">
+                <div class="cartmini__top p-relative">
+                    <div class="cartmini__title">
+                        <h4>Your cart</h4>
+                    </div>
+                    <div class="cartmini__close">
+                        <button type="button" class="cartmini__close-btn cartmini-close-btn"><i class="fal fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="cartmini__widget">
+                    <div class="cartmini__widget-item">
+                        <div class="cartmini__thumb">
+                            <a href="product-details.html">
+                                <img src="/img/shop/sm-product-1.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="cartmini__content">
+                            <h5><a href="product-details.html">Colmi Smart Wathc</a></h5>
+                            <div class="cartmini__price-wrapper">
+                                <span class="cartmini__price">$36.00</span>
+                            </div>
+                        </div>
+                        <button class="cartmini__del"><i class="fal fa-times"></i></button>
+                    </div>
+                    <div class="cartmini__widget-item">
+                        <div class="cartmini__thumb">
+                            <a href="product-details.html">
+                                <img src="/img/shop/sm-product-2.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="cartmini__content">
+                            <h5><a href="product-details.html">Apple Air Pods</a></h5>
+                            <div class="cartmini__price-wrapper">
+                                <span class="cartmini__price">$28.00</span>
+                            </div>
+                        </div>
+                        <button class="cartmini__del"><i class="fal fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- for wp -->
+            </div>
+            <div class="cartmini__checkout">
+                <div class="cartmini__checkout-title mb-30">
+                    <h4>Subtotal:</h4>
+                    <span>$113.00</span>
+                </div>
+                <div class="cartmini__checkout-btn">
+                    <a href="#" class="cartmini-btn mb-10 w-100"> <span></span> view cart</a>
+                    <a href="#" class="cartmini-btn-border w-100"> <span></span> checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-overlay"></div>
+    <!-- cart mini area end -->
+    <!-- header-area -->
+    <header class="td-header-height">
+        <div id="header-sticky" class="td-header__area z-index-999 td-transparent  header-mobile-spacing">
+            <div class="container-fluid container-1680">
+                <div class="row align-items-center">
+                    <div class="col-xxl-9 col-xl-10 col-lg-10 col-6">
+                        <div class="tdmenu__wrap d-flex align-items-center justify-content-between">
+                            <div class="logo">
+                                <a class="logo-1 logo-sticky-none" href="index.html"><img data-width="150" src="/img/logo/logo-white.png" alt="Logo"></a>
+                                <a class="logo-2 d-none" href="index.html"><img data-width="150" src="/img/logo/logo-black.png" alt="Logo"></a>
+                            </div>
+                            <nav class="tdmenu__nav ml-50 mr-50 d-none d-xl-flex">
+                                <div class="tdmenu__navbar-wrap tdmenu__main-menu">
+                                    <ul class="navigation">
+                                        <li class="active menu-item-has-children">
+                                            <a href="index.html">Home</a>
+                                            <ul class="sub-menu">
+                                                <li class="active"><a href="index.html">Home One</a></li>
+                                                <li><a href="index-2.html">Home Two</a></li>
+                                                <li><a href="index-3.html">Home Three</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children">
+                                            <a href="~/Events">Events</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="events.html">Events</a></li>
+                                                <li><a href="about.html">About Events</a></li>
+                                                <li><a href="events-venue.html">Events Venue</a></li>
+                                                <li><a href="gallery.html">Events Gallery</a></li>
+                                                <li><a href="events-details.html">Events Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children">
+                                            <a href="team.html">Speakers</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="team.html">Speakers</a></li>
+                                                <li><a href="team-details.html">Speakers Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children">
+                                            <a href="blog.html">Pages</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="blog-details.html">Blog Details</a></li>
+                                                <li><a href="error.html">Error</a></li>
+                                                <li><a href="faq.html">Faq</a></li>
+                                                <li><a href="pricing.html">Pricing</a></li>
+                                                <li><a href="product.html">Product</a></li>
+                                                <li><a href="product-details.html">Product Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-2 col-lg-2 col-6">
+                        <div class="td-menu-right-action d-flex align-items-center justify-content-end">
+                            <button class="search-button search-open-btn">
+                                <i class="flaticon-search"></i>
+                            </button>
+                            <div class="td-header-cart p-relative ml-5">
+                                <button class="cart-button cartmini-open-btn">
+                                    <i class="flaticon-shopping-cart"></i>
+                                    <span class="td-header-cart-count">0</span>
+                                </button>
+                            </div>
+                            <div class="td-header-menu-bar lh-1 p-relative ml-15">
+                                <button class="tdmenu-offcanvas-open-btn menu-tigger d-none d-xl-block">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                                <button class="tdmenu-offcanvas-open-btn mobile-nav-toggler d-block d-xl-none">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - EMS.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        <!-- Mobile Menu  -->
+        <div class="tdmobile__menu">
+            <nav class="tdmobile__menu-box">
+                <div class="close-btn"><i class="fa-solid fa-xmark"></i></div>
+                <div class="nav-logo">
+                    <a href="index.html"><img src="/img/logo/logo-black.png" alt="logo"></a>
+                </div>
+                <div class="tdmobile__search">
+                    <form action="#">
+                        <input type="text" placeholder="Search here...">
+                        <button><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="tdmobile__menu-outer">
+                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                </div>
+                <div class="mt-30 ml-25 mr-25">
+                    <a class="td-btn td-left-right w-100 text-center" href="contact.html">
+                        <span class="mr10 td-text d-inline-block mr-5">Buy Ticket</span>
+                        <span class="td-arrow-angle">
+                            <svg class="td-arrow-svg-top-right" width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="white" />
+                                <path d="M0.943836 13.5C0.685616 13.5 0.45411 13.4021 0.276027 13.224C0.0979452 13.0459 0 12.8055 0 12.5562C0 12.3068 0.0979452 12.0664 0.276027 11.8884L9.76781 2.38767H2.02123C1.49589 2.38767 1.0774 1.96027 1.0774 1.44384C1.0774 0.927397 1.50479 0.5 2.03014 0.5H12.0562C12.1274 0.5 12.1986 0.508904 12.2788 0.526712L12.4034 0.562329L12.537 0.633562C12.5637 0.65137 12.5993 0.678082 12.626 0.69589C12.6973 0.749315 12.7507 0.80274 12.7952 0.856164C12.8219 0.891781 12.8575 0.927397 12.8842 0.989726L12.9555 1.1411L12.9822 1.22123C13 1.29247 13.0089 1.3726 13.0089 1.44384V11.4699C13.0089 11.9952 12.5815 12.4137 12.0651 12.4137C11.5486 12.4137 11.1212 11.9863 11.1212 11.4699V3.72329L1.62055 13.224C1.44247 13.4021 1.20205 13.5 0.943836 13.5Z" fill="white" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+                <div class="social-links">
+                    <ul class="list-wrap">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="tdmobile__menu-backdrop"></div>
+        <!-- End Mobile Menu -->
+        <!-- offCanvas-menu -->
+        <div class="offCanvas__info">
+            <div class="offCanvas__close-icon menu-close">
+                <button><i class="fa-sharp fa-regular fa-xmark"></i></button>
+            </div>
+            <div class="offCanvas__logo mb-30">
+                <a href="index.html"><img src="/img/logo/logo-black.png" alt="Logo"></a>
+            </div>
+            <div class="offCanvas__side-info mb-30">
+                <div class="contact-list mb-30">
+                    <h4>Office Address</h4>
+                    <a href="https://www.google.com/maps" target="_blank">123/A, Miranda City Likaoli <br> Prikano, Dope</a>
+                </div>
+                <div class="contact-list mb-30">
+                    <h4>Phone Number</h4>
+                    <a href="tel:(090)87658654385">+0989 7876 9865 9</a>
+                    <a href="tel:(090)87658654385">+(090) 8765 86543 85</a>
+                </div>
+                <div class="contact-list mb-30">
+                    <h4>Email Address</h4>
+                    <a href="mailto:info@example.com">info@example.com</a>
+                    <a href="mailto:info@example.com">example.mail@hum.com</a>
+                </div>
+            </div>
+            <div class="offCanvas__social-icon mt-30">
+                <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-google-plus-g"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="offCanvas__overly"></div>
+        <!-- offCanvas-menu-end -->
+
+    </header>
+    <!-- header-area-end -->
+    <!-- main-area -->
+    <main>
+        @RenderBody()
+
+    </main>
+    <!-- main-area-end -->
+    <!-- footer-area-start -->
+    <footer>
+        <div class="td-footer-area bg-position pt-130" data-background="/img/footer/bg.jpg">
+            <div class="container">
+                <div class="row mb-30">
+                    <div class="col-lg-3 col-md-5">
+                        <div class="td-footer-widget mb-40">
+                            <div class="td-footer-logo mb-20">
+                                <a href="index.html"><img src="/img/logo/logo-white.png" alt="logo"></a>
+                            </div>
+                            <p class="text mb-10">
+                                Middlest 2 East 42nd Streearketplace
+                                New York, NY 10017
+                            </p>
+                            <a class="number mb-10 d-inline-block" href="tel:+123(55)90067990">+123(55) 90067990</a>
+                            <a class="email" href="mailto:info@gmail.com">info@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-7">
+                        <div class="td-footer-widget space ml-90 mb-40">
+                            <h3 class="td-footer-title mb-20">Quick links</h3>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="td-footer-links">
+                                        <ul>
+                                            <li><a href="#">About this Event</a></li>
+                                            <li><a href="#">Venue</a></li>
+                                            <li><a href="#">Speakers</a></li>
+                                            <li><a href="#">Agenda</a></li>
+                                            <li><a href="#">Sponsors</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="td-footer-links">
+                                        <ul>
+                                            <li><a href="#">News</a></li>
+                                            <li><a href="#">Get Tickets</a></li>
+                                            <li><a href="#">Benefits</a></li>
+                                            <li><a href="#">Contact Us</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="td-footer-widget td-footer-subscribe mb-40">
+                            <h3 class="td-footer-title mb-20">Quick links</h3>
+                            <p class="text mb-0">
+                                Our expertise, as well as our passion for web
+                                design, sets us apart from other agencies.
+                            </p>
+                            <div class="td-footer-form p-relative">
+                                <input type="text" placeholder="E-mail Address">
+                                <button type="submit" class="td-footer-form-btn">
+                                    <svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.03931 8.9707H19.0393M19.0393 8.9707L12.0393 1.9707M19.0393 8.9707L12.0393 15.9707" stroke="#F248B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="td-footer-bottom pt-40 pb-15">
+                            <div class="row align-items-center">
+                                <div class="col-md-9">
+                                    <div class="td-footer-bottom-copyright mb-30">
+                                        <p>Copyright © 2025 evente.com. All rights reserved.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="td-footer-bottom-social text-right mb-30">
+                                        <span><a href="#"><i class="fa-brands fa-linkedin"></i></a></span>
+                                        <span><a href="#"><i class="fa-brands fa-instagram"></i></a></span>
+                                        <span>
+                                            <a href="#">
+                                                <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M16.3783 0.111328H19.3942L12.8054 7.64181L20.5565 17.8891H14.4875L9.73399 11.6742L4.2949 17.8891H1.27723L8.32453 9.83441L0.888855 0.111328H7.11199L11.4087 5.79201L16.3783 0.111328ZM15.3199 16.084H16.991L6.20396 1.82164H4.41068L15.3199 16.084Z" fill="currentColor" />
+                                                </svg>
+                                            </a>
+                                        </span>
+                                        <span><a href="#"><i class="fa-brands fa-whatsapp"></i></a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- footer-area-end -->
+    <!-- JS here -->
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/isotope.pkgd.min.js"></script>
+    <script src="/js/ion.rangeSlider.min.js"></script>
+    <script src="/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/jquery.odometer.min.js"></script>
+    <script src="/js/jquery-appear.js"></script>
+    <script src="/js/swiper-bundle.min.js"></script>
+    <script src="/js/Jarallax.js"></script>
+    <script src="/js/nice-select.js"></script>
+    <script src="/js/ajax-form.js"></script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/main.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
