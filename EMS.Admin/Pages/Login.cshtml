@@ -1,0 +1,82 @@
+﻿@page
+@model EMS.Admin.Pages.LoginModel
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body style="background-color: #f1f4f9;">
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Inner content -->
+			<div class="content-inner">
+
+				<!-- Content area -->
+				<div class="content d-flex justify-content-center align-items-center">
+					
+					<!-- Login form -->
+					<form class="mt-5" method="post" style="min-width:400px;">
+						<div class="card mb-0">
+							<div class="card-body">
+								<div class="text-center mb-3">
+									<div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">
+										<img src="/images/login.png" style="height:64px;" alt="">
+									</div>
+									<h5 class="mb-0">Login to your account</h5>
+									<span class="d-block text-muted">Enter your credentials below</span>
+								</div>
+								@if(!String.IsNullOrEmpty(Model.ErrMsg)){
+									<h6 class="text-danger text-center">@Model.ErrMsg!</h6>
+								}
+								<div class="mb-3">
+									<label class="form-label">Username</label>
+									<input type="text" name="username" class="form-control" placeholder="your email address">
+								</div>
+
+								<div class="mb-3">
+									<label class="form-label">Password</label>
+									<input type="password" name="password" class="form-control" placeholder="•••••••••••">
+								</div>
+
+								<div class="mb-3">
+									<button type="submit" class="btn btn-primary w-100">Sign in</button>
+								</div>
+							
+							</div>
+						</div>
+					</form>
+					<!-- /login form -->
+
+				</div>
+				<!-- /content area -->
+				
+
+			</div>
+			<!-- /inner content -->
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Admin", "EMS.Admin\EMS.Admin.csproj", "{B950D1E0-97FD-41A1-9714-B20996C8018F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Web", "EMS.Web\EMS.Web.csproj", "{16E2943A-5758-4775-9329-98E385FAF768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Data", "EMS.Data\EMS.Data.csproj", "{6F3C33BD-7C3A-4FC8-B2FB-B4675276AE48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B950D1E0-97FD-41A1-9714-B20996C8018F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B950D1E0-97FD-41A1-9714-B20996C8018F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B950D1E0-97FD-41A1-9714-B20996C8018F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B950D1E0-97FD-41A1-9714-B20996C8018F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16E2943A-5758-4775-9329-98E385FAF768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E2943A-5758-4775-9329-98E385FAF768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E2943A-5758-4775-9329-98E385FAF768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E2943A-5758-4775-9329-98E385FAF768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F3C33BD-7C3A-4FC8-B2FB-B4675276AE48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3C33BD-7C3A-4FC8-B2FB-B4675276AE48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3C33BD-7C3A-4FC8-B2FB-B4675276AE48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F3C33BD-7C3A-4FC8-B2FB-B4675276AE48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

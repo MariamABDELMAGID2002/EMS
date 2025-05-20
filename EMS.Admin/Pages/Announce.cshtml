@@ -1,0 +1,93 @@
+﻿@page "~/Announce/{act?}"
+@model EMS.Admin.Pages.AnnounceModel
+@{
+    ViewData["Title"] = "Announcements";
+}
+
+
+<div class="card border-dark mb-4">
+    <div class="card-header bg-dark text-white header-elements-inline">
+        <h5 class="card-title">Announcement</h5>
+    </div>
+    <div class="card-body">
+        <div class="row form-group">
+
+            <div class="col-md-2">
+                <label>Code</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Code">
+            </div>
+
+            <div class="col-md-2">
+                <label class="mt-4">
+                    <input type="checkbox" checked="checked">
+                    <span class="p-0"></span>
+                    Active
+                </label>
+            </div>
+            
+
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <div class="mt-2 mt-sm-0 float-end">
+            <input type="button" class="btn btn-success btn-sm" value="  Save  " />
+            <input type="button" class="btn btn-danger btn-sm" value=" Delete " onclick="return confirm('are you sure that you want to delete this announcement?');" />
+            <a class="btn btn-info btn-sm" href="~/Announce"> Cancel </a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="card border-dark">
+    <div class="card-header bg-dark text-white header-elements-inline">
+        <h5 class="card-title float-start">
+            Announcements
+            <span class="badge">@Model.Announcments.Count Row</span>
+        </h5>
+
+        <div class="header-elements">
+            <form method="post" class="d-inline float-end">
+                <a class="btn btn-success btn-sm" href="/Announce/New">Add Announcement</a>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="card-body" style="display:none;">
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>AnnounceID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Published</th>
+                <th>Edit</th>
+            </tr>
+            @{
+                foreach (var announce in Model.Announcments)
+                {
+                    <tr>
+                        <td>@announce.AnnounceID</td>
+                        <td>@announce.Title</td>
+                        <td>@announce.Description</td>
+                        <td>@announce.CreatedAt</td>
+                        <td>@announce.UpdatedAt</td>
+                        <td>@announce.Published</td>
+                        <td><a class="link-primary fw-bold" href="~/Announce/@announce.AnnounceID">Edit</a> </td>
+                    </tr>
+                }
+            }
+        </table>
+
+    </div>
+</div>
+
+
+
+
