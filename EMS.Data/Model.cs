@@ -42,7 +42,6 @@ namespace EMS.Data
 		public int? TicketTypeID { get; set; }
 		public double? Price { get; set; }
 		public int? Quota { get; set; }
-
 	}
 	public class EMEventType
 	{
