@@ -4,18 +4,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EMS.Admin.Pages
 {
-    public class UserModel : PageModel
+    public class EventTypeModel : PageModel
     {
 		private readonly IConfiguration config;
 		[BindProperty(SupportsGet = true)]
 		public string Act { get; set; } = "";
 		[BindProperty]
-		public UMSUser User { get; set; }
-		public List<UMSUser> Users { get; set; }
+		public EMEventType EventType { get; set; }
+		public List<EMEventType> EventTypes { get; set; }
 		public string Err { get; set; } = "";
-		[BindProperty]
-		public string NewPassword { get; set; } = "";
-		public UserModel(IConfiguration _configuration)
+		public EventTypeModel(IConfiguration _configuration)
 		{
 			config = _configuration;
 		}
@@ -24,23 +22,21 @@ namespace EMS.Admin.Pages
 		{
 
 			EMService db = new EMService(config.GetConnectionString("emdb"));
-			Users = db.GetUser();
+			EventTypes = db.GetEventType();
 			int.TryParse(Act, out int id);
 			if (id == 0)
-				User = new UMSUser();
+				EventType = new EMEventType();
 			else
-				User = db.GetUser(id).FirstOrDefault() ?? new UMSUser();
+				EventType = db.GetEventType(id).FirstOrDefault() ?? new EMEventType();
 
 		}
 		public ActionResult OnPost()
 		{
 
 			EMService db = new EMService(config.GetConnectionString("emdb"));
-			if(!string.IsNullOrEmpty(NewPassword))
-				User.Password = NewPassword;
-			db.SaveUser(User);
-			Users = db.GetUser();
-			return RedirectToPage("User", new
+			db.SaveEventType(EventType);
+			EventTypes = db.GetEventType();
+			return RedirectToPage("EventType", new
 			{
 				Act = (int?)null,
 			});
@@ -49,22 +45,17 @@ namespace EMS.Admin.Pages
 		{
 
 			EMService db = new EMService(config.GetConnectionString("emdb"));
-			Users = db.GetUser();
+			EventTypes = db.GetEventType();
 			int.TryParse(Act, out int id);
 
-			int usedCount = db.GetUsedCount(EMService.UsedTypes.users, id);
+			int usedCount = db.GetUsedCount(EMService.UsedTypes.eventTypes, id);
 			if (usedCount > 0)
 			{
-				Err = $"Can't delete this user because it used {usedCount} times";
+				Err = $"Can't delete this type because it used {usedCount} times";
 				return Page();
 			}
-			if (db.IsAdmin(id))
-			{
-				Err = $"admin users can't be deleted";
-				return Page();
-			}
-			db.DeleteUser(id);
-			return RedirectToPage("User", new
+			db.DeleteEventType(id);
+			return RedirectToPage("EventType", new
 			{
 				Act = (int?)null,
 			});

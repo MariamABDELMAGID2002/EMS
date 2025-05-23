@@ -14,7 +14,7 @@ namespace EMS.Data
 		public string Description { get; set; }
 		public DateTime? CreatedAt { get; set; }
 		public DateTime? UpdatedAt { get; set; }
-		public bool? Published { get; set; }
+		public bool Published { get; set; }
 
 	}
 	public class EMEvent
@@ -28,11 +28,11 @@ namespace EMS.Data
 		public string Location { get; set; }
 		public string latitude { get; set; }
 		public string longitude { get; set; }
-		public bool? CanPlanned { get; set; }
+		public bool CanPlanned { get; set; }
 		public int? MaxQuota { get; set; }
 		public DateTime? CreatedAt { get; set; }
 		public DateTime? UpdatedAt { get; set; }
-		public bool? Published { get; set; }
+		public bool Published { get; set; }
 
 	}
 	public class EMEventPrice
@@ -42,13 +42,15 @@ namespace EMS.Data
 		public int? TicketTypeID { get; set; }
 		public double? Price { get; set; }
 		public int? Quota { get; set; }
+		public virtual string TypeName { get; set; } = "";
+
 	}
 	public class EMEventType
 	{
 		public int EventTypeID { get; set; }
 		public string TypeName { get; set; }
 		public string Description { get; set; }
-		public bool? Active { get; set; }
+		public bool Active { get; set; }
 
 	}
 	public class EMOrder
@@ -58,6 +60,7 @@ namespace EMS.Data
 		public DateTime? OrderDate { get; set; }
 		public double? TotalAmount { get; set; }
 		public string PaymentMethod { get; set; }
+		public virtual string RealName { get; set; }
 
 	}
 	public class EMOrderItem
@@ -67,6 +70,8 @@ namespace EMS.Data
 		public int? PriceID { get; set; }
 		public double? UnitPrice { get; set; }
 		public int? UnitCount { get; set; }
+		public virtual string EventName { get; set; }
+		public virtual string TicketType { get; set; }
 
 	}
 	public class EMTicketType
@@ -74,7 +79,7 @@ namespace EMS.Data
 		public int TicketTypeID { get; set; }
 		public string TypeName { get; set; }
 		public string Description { get; set; }
-		public bool? Active { get; set; }
+		public bool Active { get; set; }
 
 	}
 	public class UMInterest
@@ -90,10 +95,10 @@ namespace EMS.Data
 		public string RealName { get; set; }
 		public string Email { get; set; }
 		public string Password { get; set; }
-		public bool? PassExpired { get; set; }
-		public bool? Approved { get; set; }
+		public bool PassExpired { get; set; }
+		public bool Approved { get; set; }
 		public DateTime? RegisterDate { get; set; }
-		public bool? IsAdmin { get; set; }
+		public bool IsAdmin { get; set; }
 
 	}
 }

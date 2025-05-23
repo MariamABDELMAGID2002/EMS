@@ -2,44 +2,59 @@
 @model EMS.Admin.Pages.AnnounceModel
 @{
     ViewData["Title"] = "Announcements";
+    string showDelete = Model.Act == "0" ? "visually-hidden":"";
 }
 
+@if (!string.IsNullOrEmpty(Model.Act))
+{
+    <form method="post" class="d-inline" enctype="multipart/form-data">
+        <div class="card border-dark mb-4">
+            <div class="card-header bg-dark text-white header-elements-inline">
+                <h5 class="card-title">Announcement</h5>
+            </div>
+            <div class="card-body">
+                <div class="row form-group">
+                    <input type="hidden" asp-for="@Model.Announce.AnnounceID" />
+                    <input type="hidden" asp-for="@Model.Announce.CreatedAt" />
+                    <input type="hidden" asp-for="@Model.Announce.UpdatedAt" />
+                    <div class="col-md-6">
+                        <label class="fw-bold">Title</label>
+                        <input type="text" asp-for="@Model.Announce.Title" class="form-control form-control-sm" placeholder="Title" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="mt-4 fw-bold">
+                            <input asp-for="@Model.Announce.Published" type="checkbox">
+                            <span class="p-0"></span>
+                            Active
+                        </label>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="fw-bold">Description</label>
+                        <textarea asp-for="@Model.Announce.Description" rows="5" cols="3" class="form-control form-control-sm" placeholder="Announcement Description"></textarea>
+                    </div>
+                    <div class="col-md-9">
+                        <label class="fw-bold">Upload Image</label>
+                            <input type="file" asp-for="@Model.upFile" class="form-control form-control-sm"></input>
+                    </div>
 
-<div class="card border-dark mb-4">
-    <div class="card-header bg-dark text-white header-elements-inline">
-        <h5 class="card-title">Announcement</h5>
-    </div>
-    <div class="card-body">
-        <div class="row form-group">
 
-            <div class="col-md-2">
-                <label>Code</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Code">
+
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="mt-2 mt-sm-0 float-end">
+
+                    <input type="submit" class="btn btn-success btn-sm" value="  Save  " />
+                    <input type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm @showDelete" value=" Delete " onclick="return confirm('are you sure that you want to delete this announcement?');" />
+                    <a class="btn btn-info btn-sm" href="~/Announce"> Cancel </a>
+
+                </div>
             </div>
 
-            <div class="col-md-2">
-                <label class="mt-4">
-                    <input type="checkbox" checked="checked">
-                    <span class="p-0"></span>
-                    Active
-                </label>
-            </div>
-            
-
         </div>
-
-    </div>
-    <div class="card-footer">
-        <div class="mt-2 mt-sm-0 float-end">
-            <input type="button" class="btn btn-success btn-sm" value="  Save  " />
-            <input type="button" class="btn btn-danger btn-sm" value=" Delete " onclick="return confirm('are you sure that you want to delete this announcement?');" />
-            <a class="btn btn-info btn-sm" href="~/Announce"> Cancel </a>
-        </div>
-    </div>
-
-</div>
-
-
+    </form>
+}
 
 <div class="card border-dark">
     <div class="card-header bg-dark text-white header-elements-inline">
@@ -48,10 +63,8 @@
             <span class="badge">@Model.Announcments.Count Row</span>
         </h5>
 
-        <div class="header-elements">
-            <form method="post" class="d-inline float-end">
-                <a class="btn btn-success btn-sm" href="/Announce/New">Add Announcement</a>
-            </form>
+        <div class="header-elements float-end">
+            <a class="btn btn-success btn-sm" href="/Announce/0">Add Announcement</a>
         </div>
 
     </div>
@@ -63,7 +76,7 @@
             <tr>
                 <th>AnnounceID</th>
                 <th>Title</th>
-                <th>Description</th>
+                <th>Image</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>Published</th>
@@ -75,10 +88,19 @@
                     <tr>
                         <td>@announce.AnnounceID</td>
                         <td>@announce.Title</td>
-                        <td>@announce.Description</td>
+                        <td><img style="width:50px;height:30px;" src="~/upload/@string.Format("a{0}.jpg", announce.AnnounceID) " /></td>
                         <td>@announce.CreatedAt</td>
                         <td>@announce.UpdatedAt</td>
-                        <td>@announce.Published</td>
+                        <td class="fw-bold">
+                            @if (announce.Published)
+                            {
+                                <span class="text-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">No</span>
+                            }
+                        </td>
                         <td><a class="link-primary fw-bold" href="~/Announce/@announce.AnnounceID">Edit</a> </td>
                     </tr>
                 }

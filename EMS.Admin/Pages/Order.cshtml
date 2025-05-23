@@ -1,4 +1,97 @@
-﻿@page
+﻿
+@page "~/Order/{act?}"
 @model EMS.Admin.Pages.OrderModel
 @{
+    ViewData["Title"] = "Orders";
+    string showDelete = Model.Act == "0" ? "visually-hidden":"";
 }
+
+@if (!string.IsNullOrEmpty(Model.Act))
+{
+    <form method="post" class="d-inline" enctype="multipart/form-data">
+        <div class="card border-dark mb-4">
+            <div class="card-header bg-dark text-white header-elements-inline">
+                <h5 class="card-title">Order Items</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <tr>
+                            <th>Event</th>
+                            <th>Ticket Type</th>
+                            <th>Unit Price</th>
+                            <th>Unit Count</th>
+                            
+                        </tr>
+                        @{
+                            foreach (var item in Model.OrderItems)
+                            {
+                                <tr>
+                                    <td>@item.EventName</td>
+                                    <td>@item.TicketType</td>
+                                    <td>@item.UnitPrice</td>
+                                    <td>@item.UnitCount</td>
+                                    
+                                </tr>
+                            }
+                        }
+                    </table>
+
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="mt-2 mt-sm-0 float-end">
+
+                    <input type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm @showDelete" value=" Delete " onclick="return confirm('are you sure that you want to delete this order?');" />
+                    <a class="btn btn-info btn-sm" href="~/Order"> Cancel </a>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+}
+
+<div class="card border-dark">
+    <div class="card-header bg-dark text-white header-elements-inline">
+        <h5 class="card-title float-start">
+            Orders
+            <span class="badge">@Model.Orders.Count Row</span>
+        </h5>
+
+    </div>
+
+    <div class="card-body" style="display:none;">
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>OrderID</th>
+                <th>User</th>
+                <th>Date</th>
+                <th>Total Amount</th>
+                <th>Payment Method</th>
+                <th>Edit</th>
+            </tr>
+            @{
+                foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.OrderID</td>
+                        <td>@order.RealName</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.TotalAmount</td>
+                        <td>@order.PaymentMethod</td>
+                        <td><a class="link-primary fw-bold" href="~/Order/@order.OrderID">Details</a> </td>
+                    </tr>
+                }
+            }
+        </table>
+
+    </div>
+</div>
+
+
+
+

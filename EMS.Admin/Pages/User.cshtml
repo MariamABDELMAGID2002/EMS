@@ -1,11 +1,133 @@
-﻿@page
+﻿
+@page "~/User/{act?}"
 @model EMS.Admin.Pages.UserModel
 @{
     ViewData["Title"] = "Users";
+    string showDelete = Model.Act == "0" ? "visually-hidden":"";
+}
+<div class="alert-danger text-center fw-bold mb-2 mt-1 border-1">@Model.Err</div>
+@if (!string.IsNullOrEmpty(Model.Act))
+{
+    <form method="post" class="d-inline">
+        
+        <div class="card border-dark mb-4">
+            <div class="card-header bg-dark text-white header-elements-inline">
+                <h5 class="card-title">Users</h5>
+            </div>
+            <div class="card-body">
+                <div class="row form-group">
+                    <input type="hidden" asp-for="@Model.User.UserID" />
+                    <div class="col-md-6">
+                        <label class="fw-bold">Real Name</label>
+                        <input type="text" asp-for="@Model.User.RealName" class="form-control form-control-sm" placeholder="Real Name" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold">Email</label>
+                        <input type="text" asp-for="@Model.User.Email" class="form-control form-control-sm" placeholder="Email" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold">Password</label>
+                        <input type="password" asp-for="@Model.NewPassword" class="form-control form-control-sm" placeholder="Password" />
+                    </div>
+                    <input type="hidden" asp-for="@Model.User.Password" />
+                    <div class="col-md-2">
+                        <label class="mt-4 fw-bold">
+                            <input asp-for="@Model.User.Approved" type="checkbox">
+                            <span class="p-0"></span>
+                            Approved
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="mt-4 fw-bold">
+                            <input asp-for="@Model.User.IsAdmin" type="checkbox">
+                            <span class="p-0"></span>
+                            Is Admin
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="mt-4 fw-bold">
+                            <input asp-for="@Model.User.PassExpired" type="checkbox">
+                            <span class="p-0"></span>
+                            Password Expired
+                        </label>
+                    </div>
+                   
+                   
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="mt-2 mt-sm-0 float-end">
+
+                    <input type="submit" class="btn btn-success btn-sm" value="  Save  " />
+                    <input type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm @showDelete" value=" Delete " onclick="return confirm('are you sure that you want to delete this user?');" />
+                    <a class="btn btn-info btn-sm" href="~/User"> Cancel </a>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
 }
 
+<div class="card border-dark">
+    <div class="card-header bg-dark text-white header-elements-inline">
+        <h5 class="card-title float-start">
+            Users
+            <span class="badge">@Model.Users.Count Row</span>
+        </h5>
 
-test user page by admin
+        <div class="header-elements float-end">
+            <a class="btn btn-success btn-sm" href="/User/0">Add New User</a>
+        </div>
 
-viewed by mariam
-last change
+    </div>
+
+    <div class="card-body" style="display:none;">
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>User ID</th>
+                <th>Real Name</th>
+                <th>Email</th>
+                <th>Is Admin</th>
+                <th>Approved</th>
+                <th>Edit</th>
+            </tr>
+            @{
+                foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.UserID</td>
+                        <td>@user.RealName</td>
+                        <td>@user.Email</td>
+                        
+                        <td class="fw-bold">
+                            @if (user.IsAdmin)
+                            {
+                                <span class="text-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">No</span>
+                            }
+                        </td>
+                        <td class="fw-bold">
+                            @if (user.Approved)
+                            {
+                                <span class="text-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">No</span>
+                            }
+                        </td>
+                        <td><a class="link-primary fw-bold" href="~/User/@user.UserID">Edit</a> </td>
+                    </tr>
+                }
+            }
+        </table>
+
+    </div>
+</div>

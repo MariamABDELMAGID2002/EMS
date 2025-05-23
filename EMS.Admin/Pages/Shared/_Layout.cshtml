@@ -4,14 +4,14 @@
 @{
     var userName = HttpContextAccessor.HttpContext?.Session.GetString("UserName");
 
-        //     <script>
-        //     @if (string.IsNullOrEmpty(userName))
-        //     {
-        //         <text>
-        //              window.location.href = '@Url.Page("/Login")';
-        //         </text>
-        //     }
-        // </script>
+            // <script>
+            // @if (string.IsNullOrEmpty(userName))
+            // {
+            //     <text>
+            //          window.location.href = '@Url.Page("/Login")';
+            //     </text>
+            // }
+            // </script>
 }
 
 <!DOCTYPE html>
@@ -36,19 +36,30 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 fw-bold">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" href="~/Index">Home</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Settings
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="~/EventType">Event Type</a></li>
+                                <li><a class="dropdown-item" href="~/TicketType">Ticket Type</a></li>
+                                
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Announce">Announcements</a>
+                            <a class="nav-link text-dark" href="~/Announce">Announcements</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Event">Events</a>
+                            <a class="nav-link text-dark" href="~/Event">Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Order">Orders</a>
+                            <a class="nav-link text-dark" href="~/Order">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/User">Users</a>
+                            <a class="nav-link text-dark" href="~/User">Users</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav  float-right">

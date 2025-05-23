@@ -7,7 +7,12 @@ namespace EMS.Admin.Pages
     public class AnnounceModel : PageModel
     {
 		private readonly IConfiguration config;
+		[BindProperty(SupportsGet =true)]
+		public string Act { get; set; } = "";
+		[BindProperty]
+		public EMAnnounce Announce { get; set; }
 		public List<EMAnnounce> Announcments { get; set; }
+		public IFormFile upFile { get; set; }
 		public AnnounceModel(IConfiguration _configuration)
 		{
 			config = _configuration;
@@ -15,21 +20,52 @@ namespace EMS.Admin.Pages
 
 		public void OnGet()
         {
+			
 			EMService db = new EMService(config.GetConnectionString("emdb"));
-			Announcments = db.AnnounceGet();
+			Announcments = db.GetAnnounce();
+			int.TryParse(Act, out int id);
+			if (id == 0)
+				Announce = new EMAnnounce();
+			else 
+				Announce = db.GetAnnounce(id).FirstOrDefault()??new EMAnnounce();
+
 		}
-		public void OnPost()
+		public ActionResult OnPost()
 		{
 
-			EMAnnounce objAnnounce = new EMAnnounce();
-			objAnnounce.Title = "Test Title";
-			objAnnounce.Description = "Test Description";
-			objAnnounce.CreatedAt = DateTime.Now;
-			objAnnounce.UpdatedAt = null;
-			objAnnounce.Published = true;
 			EMService db = new EMService(config.GetConnectionString("emdb"));
-			db.AnnounceSave(objAnnounce);
-			Announcments = db.AnnounceGet();
+			if(Announce.AnnounceID!=0)
+				Announce.UpdatedAt = DateTime.Now;
+			db.SaveAnnounce(Announce);
+
+			if (upFile != null && upFile.Length > 0)
+			{
+				var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "upload", "a"+Announce.AnnounceID+".jpg");
+				using (var fileStream = new FileStream(filePath, FileMode.Create))
+				{
+					 upFile.CopyTo(fileStream);
+				}
+			}
+
+
+			Announcments = db.GetAnnounce();
+			return RedirectToPage("Announce", new
+			{
+				Act = (int?)null,
+			});
 		}
+		public ActionResult OnPostDelete()
+		{
+			
+			EMService db = new EMService(config.GetConnectionString("emdb"));
+			int.TryParse(Act, out int id);
+			db.DeleteAnnounce(id);
+			Announcments = db.GetAnnounce();
+			return RedirectToPage("Announce", new
+			{
+				Act = (int?)null,
+			});
+		}
+		
 	}
 }

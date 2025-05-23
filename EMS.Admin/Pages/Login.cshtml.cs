@@ -25,12 +25,12 @@ namespace EMS.Admin.Pages
 				return Page();
 			}
             EMService db = new EMService(config.GetConnectionString("emdb"));
-            UMSUser user =db.UserLogin(username, password.Trim());
+            UMSUser user =db.Login(username, password.Trim());
             if (user is null)
                 ErrMsg = "Invalid email or password";
-            else if (!user.IsAdmin.Value)
+            else if (!user.IsAdmin)
                 ErrMsg = "This user is not admin";
-            else if (!user.Approved.Value)
+            else if (!user.Approved)
                 ErrMsg = "User not Approved yet!";
 
             if (ErrMsg == "")
