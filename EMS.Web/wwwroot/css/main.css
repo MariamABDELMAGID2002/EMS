@@ -851,8 +851,8 @@ textarea {
   }
 }
 .td-breadcrumb-spacing {
-  padding-top: 210px;
-  padding-bottom: 120px;
+  padding-top: 80px;
+  padding-bottom: 60px;
 }
 @media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
   .td-breadcrumb-spacing {
