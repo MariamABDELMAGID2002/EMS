@@ -161,8 +161,9 @@ namespace EMS.Data
 			string sql = "delete from EMEvent where EventID = " + id;
 			conn.Execute(sql);
 		}
-		public List<EMEvent> GetEvent(int id = 0)
+		public List<EMEvent> GetEvent(int id = 0,int userid=0)
 		{
+			// if userid <> 0 join with userinterests
 			string sql = "SELECT * FROM EMEvent ";
 			if (id != 0)
 				sql += " where EventID=" + id;
