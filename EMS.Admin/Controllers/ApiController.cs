@@ -15,10 +15,10 @@ namespace EMS.Admin.Controllers
 
 
 		[HttpGet]
-		public IActionResult GetEvents(int eventid = 0, int userid = 0)
+		public IActionResult GetEvents(int eventid = 0, int userid = 0,int count=0)
 		{
 			EMService db = new EMService(config.GetConnectionString("emdb"));
-			var events = db.GetEvent(eventid);
+			var events = db.GetEvent(eventid,userid,count);
 			return Ok(events);
 		}
 	}

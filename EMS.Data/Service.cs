@@ -83,9 +83,10 @@ namespace EMS.Data
 			string sql = "delete from EMAnnounce where AnnounceID = "+id;
 			conn.Execute(sql);
 		}
-		public List<EMAnnounce> GetAnnounce(int id=0)
+		public List<EMAnnounce> GetAnnounce(int id=0,int count=0)
 		{
-			string sql = "SELECT * FROM EMAnnounce ";
+			string cnt = count > 0 ? $"top({count})" : "";
+			string sql = $"SELECT {cnt} * FROM EMAnnounce ";
 			if (id != 0)
 				sql += " where AnnounceID=" + id;
 			sql += " ORDER BY AnnounceID DESC";
@@ -94,7 +95,7 @@ namespace EMS.Data
 
 		public List<EMEventType> GetEventType(int id = 0)
 		{
-			string sql = "SELECT * FROM EMEventType ";
+			string sql = $"SELECT * FROM EMEventType ";
 			if (id != 0)
 				sql += " where EventTypeID=" + id;
 			sql += " ORDER BY EventTypeID";
@@ -161,12 +162,19 @@ namespace EMS.Data
 			string sql = "delete from EMEvent where EventID = " + id;
 			conn.Execute(sql);
 		}
-		public List<EMEvent> GetEvent(int id = 0,int userid=0)
+		public List<EMEvent> GetEvent(int id = 0,int userid=0,int count=0)
 		{
+			string cnt = count > 0 ? $"top({count})" : "";
 			// if userid <> 0 join with userinterests
-			string sql = "SELECT * FROM EMEvent ";
+			string sql = $"SELECT {cnt} * FROM EMEvent ";
+			if (userid != 0)
+				sql += " inner join UMInterest on EMEvent.EventTypeID = UMInterest.EventType ";
+			sql += " where 1=1 ";
 			if (id != 0)
-				sql += " where EventID=" + id;
+				sql += " and EventID=" + id;
+			if(userid!=0)
+				sql += " and UserID =" + userid;
+
 			sql += " ORDER BY EventID DESC";
 			return conn.Query<EMEvent>(sql).ToList();
 		}
