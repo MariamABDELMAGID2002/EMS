@@ -1,6 +1,7 @@
-﻿@page
+﻿@page "~/EventDetails/{id}"
 @model EMS.Web.Pages.EventDetailsModel
 @{
+    var objevent = Model.Event;
 }
 
 <!-- td-breadcrumb-area-start -->
@@ -32,23 +33,14 @@
             <div class="col-lg-8">
                 <div class="td-schedule-details-left mb-40">
                     <div class="td-schedule-details-thumb mb-25">
-                        <img class="w-100 wow td-animetion-top" data-wow-duration="1.5s" data-wow-delay="0.3s" src="/img/schedule/schedule-details/thumb.jpg" alt="">
+                        <img class="w-100 wow td-animetion-top" data-wow-duration="1.5s" data-wow-delay="0.3s" src="@Model.adminPath/upload/@(string.Format("e{0}.jpg",objevent.EventID))" alt="">
                     </div>
                     <div class="td-schedule-details-content">
                         <h2 class="td-schedule-details-title mb-25">
-                            Aimply dummy text of the printing and typeset
-                            ting irem Ipsum has been theardtrullam
+                            @objevent.Title
                         </h2>
                         <p>
-                            Aimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dum
-                            my text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-                            essentially unchanged. It was popularised.
-                        </p>
-                        <p class="mb-35">
-                            Aimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dum
-                            my text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book. It has survived not only five centuries, but also the leap.
+                            @objevent.Description
                         </p>
                         
                     </div>
@@ -58,92 +50,63 @@
             <div class="col-lg-4">
                 <div class="td-schedule-details-right ml-40 mb-40">
                     <div class="td-schedule-details-right-list grey-bg mb-40">
+                        <h3 class="td-schedule-team-title mb-15">Weather Data</h3>
+                        <span class="td-schedule-team-border mb-15"></span>
+                        <div class="td-schedule-details-info-list">
+                            
+                            @if (Model.Forecast != null && Model.Forecast.Current != null)
+                            {
+                                <div class="weather-info">
+                                    <p><strong>Temperature:</strong> @Model.Forecast.Current.Temperature °C</p>
+                                    <p><strong>Wind Speed:</strong> @Model.Forecast.Current.Windspeed km/h</p>
+                                    <p><strong>Wind Direction:</strong> @Model.Forecast.Current.Winddirection°</p>
+                                    <p><strong>Time:</strong> @Model.Forecast.Current.Time</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <p>Unable to load weather data.</p>
+                            }
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="td-schedule-details-right ml-40 mb-40">
+                    <div class="td-schedule-details-right-list grey-bg mb-40">
                         <h3 class="td-schedule-team-title mb-15">Information</h3>
                         <span class="td-schedule-team-border mb-15"></span>
                         <div class="td-schedule-details-info-list">
                             <ul>
                                 <li>
                                     <span class="ceta">Category:</span>
-                                    <span>Marketing</span>
+                                    <span>@Model.EventType.TypeName</span>
                                 </li>
                                 <li>
-                                    <span class="ceta">Date:</span>
-                                    <span>january 10, 2025</span>
+                                    <span class="ceta">Start:</span>
+                                    <span>@objevent.StartDate.Value.ToString("MMMM dd,yy hh:mm tt")</span>
                                 </li>
                                 <li>
-                                    <span class="ceta">Time:</span>
-                                    <span>6:30 pm - 9:00 pm</span>
+                                    <span class="ceta">End:</span>
+                                    <span>@objevent.EndDate.Value.ToString("MMMM dd,yy hh:mm tt")</span>
                                 </li>
-                                <li>
-                                    <span class="ceta">Phone:</span>
-                                    <span><a href="tel:+1(1234)567-800">+1 (1234)- 567-800</a></span>
-                                </li>
+
                                 <li>
                                     <span class="ceta">Location:</span>
-                                    <span>New York City</span>
+                                    <span>@objevent.Location</span>
                                 </li>
                                 <li>
-                                    <span class="ceta">Venue:</span>
-                                    <span>Cineplax Hall</span>
+                                    <span class="ceta">Quota:</span>
+                                    <span>@objevent.AvailableQuota / @objevent.MaxQuota  </span>
                                 </li>
-                                <li>
-                                    <span class="ceta">E-mail:</span>
-                                    <span><a href="mailto:info@gmail.com">info@gmail.com</a></span>
-                                </li>
+                                
                             </ul>
+                            <div class="td-schedule-details-total-btn mb-35">
+                                <button type="submit" class="td-btn w-100">Purcshae Now</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="td-schedule-details-right-list grey-bg">
-                        <h3 class="td-schedule-team-title mb-15">Registration</h3>
-                        <span class="td-schedule-team-border mb-15"></span>
-                        <div class="td-schedule-details-form">
-                            <form action="#">
-                                <div class="item-select">
-                                    <select class="select  item-first">
-                                        <option>Silver Pass</option>
-                                        <option>Hotel</option>
-                                        <option>Resort</option>
-                                        <option>Apartments</option>
-                                    </select>
-                                </div>
-                                <div class="td-schedule-details-form-price mt-25">
-                                    <div class="td-schedule-details-form-quantity d-inline-block">
-                                        <span class="price">$29.00</span>
-                                        <span class="subtitle">Unlimited</span>
-                                    </div>
-                                    <div class="td-schedule-details-quantity d-inline-block">
-                                        <span class="increment">
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.21924 7H13.3836" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.30176 13V1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <input class="td-quantity-input" type="text" value="1">
-                                        <span class="decrement">
-                                            <svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="td-schedule-details-total mb-25">
-                                    <ul>
-                                        <li>
-                                            <span class="quantity">Quantity:</span>
-                                            <span>02</span>
-                                        </li>
-                                        <li>
-                                            <span class="quantity">Total Cost:</span>
-                                            <span>$58.00</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="td-schedule-details-total-btn mb-35">
-                                    <button type="submit" class="td-btn w-100">Purcshae Now</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

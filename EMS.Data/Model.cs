@@ -33,6 +33,7 @@ namespace EMS.Data
 		public DateTime? CreatedAt { get; set; }
 		public DateTime? UpdatedAt { get; set; }
 		public bool Published { get; set; }
+		public virtual int AvailableQuota { get; set; }
 
 	}
 	public class EMEventPrice

@@ -166,7 +166,9 @@ namespace EMS.Data
 		{
 			string cnt = count > 0 ? $"top({count})" : "";
 			// if userid <> 0 join with userinterests
-			string sql = $"SELECT {cnt} * FROM EMEvent ";
+
+
+			string sql = $"SELECT {cnt} * , ( MaxQuota - (SELECT SUM(dbo.EMOrderItem.UnitCount) FROM dbo.EMOrderItem INNER JOIN dbo.EMEventPrice ON dbo.EMOrderItem.PriceID = dbo.EMEventPrice.PriceID WHERE dbo.EMEventPrice.EventID = EMEvent.EventID)) as AvailableQuota FROM EMEvent ";
 			if (userid != 0)
 				sql += " inner join UMInterest on EMEvent.EventTypeID = UMInterest.EventType ";
 			sql += " where 1=1 ";

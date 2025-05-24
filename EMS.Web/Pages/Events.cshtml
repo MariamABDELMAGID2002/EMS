@@ -4,19 +4,7 @@
     ViewData["Title"] = "Events";
 }
 
-@if (Model.Forecast != null && Model.Forecast.Current != null)
-{
-    <div class="weather-info">
-        <p><strong>Temperature:</strong> @Model.Forecast.Current.Temperature °C</p>
-        <p><strong>Wind Speed:</strong> @Model.Forecast.Current.Windspeed km/h</p>
-        <p><strong>Wind Direction:</strong> @Model.Forecast.Current.Winddirection°</p>
-        <p><strong>Time:</strong> @Model.Forecast.Current.Time</p>
-    </div>
-}
-else
-{
-    <p>Unable to load weather data.</p>
-}
+
 
 <!-- td-breadcrumb-area-start -->
 <div class="td-breadcrumb-area td-breadcrumb-spacing bg-position" data-background="/img/breadcrumb/breadcrumb.jpg">
