@@ -2,3 +2,103 @@
 @model EMS.Web.Pages.CartModel
 @{
 }
+
+
+<div class="td-breadcrumb-area td-breadcrumb-spacing bg-position" data-background="/img/breadcrumb/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="td-breadcrumb-title-wrap">
+                    <h2 class="td-breadcrumb-title mb-10 wow td-animetion-left" data-wow-duration="1.5s" data-wow-delay="0.3s">Cart Page</h2>
+                    <div class="td-breadcrumb-list wow td-animetion-right" data-wow-duration="1.5s" data-wow-delay="0.3s">
+                        <ul>
+                            <li><a href="~/Index">Home</a></li>
+                            <li><i class="fa-sharp fa-solid fa-angle-right fa-fw"></i></li>
+                            <li>Cart</li>
+                            <li><i class="fa-sharp fa-solid fa-angle-right fa-fw"></i></li>
+                            <li class="pages">Complete your ticket purchase</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- td-postbox-area-start -->
+<div class="td-postbox-area pt-20 pb-20">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-xxl-12 col-xl-12 col-lg-12 td-schedule-details-right-list grey-bg">
+                <h3 class="td-schedule-team-title mb-15">Complete Ticket Purchase</h3>
+                <span class="td-schedule-team-border mb-15"></span>
+                <div class="td-schedule-details-form">
+                    <form action="#">
+                        
+                            <table class="table table-bordered table-striped table-hover">
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Ticket Type</th>
+                                    <th>Price</th>
+                                    <th>Count</th>
+                                    <th>Total</th>
+                                </tr>
+                                <tr>
+                                    <td>Event 1</td>
+                                    <td>
+                                        <select class="select  item-first">
+                                            <option>Silver Pass</option>
+                                            <option>Hotel</option>
+                                            <option>Resort</option>
+                                            <option>Apartments</option>
+                                        </select>
+                                    </td>
+                                <td class="text-center">120</td>
+                                <td class="text-center">
+                                        <div class="td-schedule-details-quantity d-inline-block">
+                                            <span class="increment">
+                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1.21924 7H13.3836" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M7.30176 13V1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                            <input class="td-quantity-input" type="text" value="1">
+                                            <span class="decrement">
+                                                <svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 1H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </td>
+                                <td class="text-center">230</td>
+                                    
+                                </tr>
+                            </table>
+
+                        
+                        
+                        
+                        <div class="td-schedule-details-total mb-25">
+                            <ul>
+                                <li>
+                                    <span class="quantity">Quantity:</span>
+                                    <span>02</span>
+                                </li>
+                                <li>
+                                    <span class="quantity">Total Cost:</span>
+                                    <span>$58.00</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="td-schedule-details-total-btn mb-35">
+                            <button type="submit" class="td-btn w-100">Purcshae Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- td-postbox-area-end -->

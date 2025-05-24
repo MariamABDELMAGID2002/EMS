@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EMS.Web.Pages
 {
-    public class AnnounceDetailsModel : PageModel
+    public class UserModel : PageModel
     {
         public void OnGet()
         {

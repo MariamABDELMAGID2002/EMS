@@ -44,8 +44,8 @@
                     <div class="col-xxl-9 col-xl-10 col-lg-10 col-6">
                         <div class="tdmenu__wrap d-flex align-items-center justify-content-between">
                             <div class="logo">
-                                <a class="logo-1 logo-sticky-none" href="index.html"><img data-width="150" src="/img/logo/logo-white.png" alt="Logo"></a>
-                                <a class="logo-2 d-none" href="index.html"><img data-width="150" src="/img/logo/logo-black.png" alt="Logo"></a>
+                                @* <a class="logo-1 logo-sticky-none" href="index.html"><img data-width="150" src="/img/logo/logo-white.png" alt="Logo"></a>
+                                <a class="logo-2 d-none" href="index.html"><img data-width="150" src="/img/logo/logo-black.png" alt="Logo"></a> *@
                             </div>
                             <nav class="tdmenu__nav ml-50 mr-50 d-none d-xl-flex">
                                 <div class="tdmenu__navbar-wrap tdmenu__main-menu">
@@ -63,9 +63,12 @@
                         <div class="td-menu-right-action d-flex align-items-center justify-content-end">
                             
                             <div class="td-header-cart p-relative ml-5">
-                                <button class="cart-button cartmini-open-btn">
+                                <a href="~/Cart" class="cart-button cartmini-open-btn ml-5">
                                     <i class="flaticon-shopping-cart"></i>  
-                                </button>
+                                </a>
+                                <a href="~/User" class="cart-button cartmini-open-btn ml-5 mr-10">
+                                    <i class="flaticon-account"></i>
+                                </a>
                             </div>
                             
                         </div>
