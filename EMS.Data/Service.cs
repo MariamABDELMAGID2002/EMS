@@ -56,6 +56,25 @@ namespace EMS.Data
 				sql += " where UserID=" + id;
 			return conn.Query<UMSUser>(sql).ToList();
 		}
+		public List<UMInterest> GetInterest(int userid)
+		{
+			string sql = "SELECT * FROM UMInterest ";
+			if (userid != 0)
+				sql += " where UserID=" + userid;
+			return conn.Query<UMInterest>(sql).ToList();
+		}
+		public void SaveInterest(UMInterest objInterest)
+		{
+			string sql = "";
+			sql = "INSERT INTO UMInterest ( UserID ,EventType ) VALUES  ( @UserID ,@EventType)";
+			conn.Execute(sql, objInterest);
+		}
+		public void DeleteInterest(int userid)
+		{
+			string sql = "delete from UMInterest where UserID = " + userid;
+			conn.Execute(sql);
+		}
+
 		public bool IsAdmin(int id)
 		{
 			string sql = "SELECT count(*) FROM UMSUser where isadmin = 1 and userid ="+id;

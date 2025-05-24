@@ -23,3 +23,57 @@
     </div>
 </div>
 <!-- td-breadcrumb-area-end -->
+
+<div class="m-auto" style="width:500px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="td-contact-form-wrap">
+                    <form method="post">
+                        <div class="td-contact-form-box">
+                            <h3 class="td-postbox-form-title mb-15 text-center">User Interests</h3>
+                            <div class="row">
+
+                                <script>
+                                    function addCheck(checked,value)
+                                    {
+                                        var obj=document.getElementById("hchecked");
+                                        if(checked)
+                                            obj.value +=","+value;
+                                        else
+                                            obj.value =obj.value.replace(","+value,"");
+                                    }
+                                </script>
+
+                                <div class="col-12 mb-20">
+                                    <input type="hidden" id="hchecked" name="chk" value=""/>
+                                    
+                                    <table class="table table-bordered table-striped table-hover">
+                                        <tr>
+                                            <th>*</th>
+                                            <th>Event Type</th>
+                                        </tr>
+                                        
+                                        @foreach (var type in Model.EventTypes)
+                                        { 
+                                            <tr>
+                                                <td><input type="checkbox" onchange="addCheck(this.checked,this.value)" id="@string.Format("chk{0}",@type.EventTypeID)" value="@type.EventTypeID" /></td>
+                                                <td>@type.TypeName</td>
+                                            </tr>
+                                        }
+                                        
+                                    </table>
+                                </div>
+                               
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="td-btn">Save Interests</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
