@@ -20,6 +20,8 @@ namespace EMS.Data
 			conn = new SqlConnection(connectionString);
 		}
 		public enum UsedTypes { eventTypes,ticketTypes,events,orders,users }
+		
+		// used before delete functions to check if item used in other tables
 		public int GetUsedCount(UsedTypes type, int id)
 		{
 			string sql = "select 0";
@@ -35,6 +37,8 @@ namespace EMS.Data
 
 			return conn.ExecuteScalar<int>(sql,new { id= id});
 		}
+		
+		// start user functions
 		public void SaveUser(UMSUser objUser)
 		{
 			string sql = "";
@@ -56,6 +60,7 @@ namespace EMS.Data
 				sql += " where UserID=" + id;
 			return conn.Query<UMSUser>(sql).ToList();
 		}
+
 		public List<UMInterest> GetInterest(int userid)
 		{
 			string sql = "SELECT * FROM UMInterest ";
@@ -85,8 +90,9 @@ namespace EMS.Data
 			string sql = "SELECT * FROM UMSUser where email = @Email and Password = @Password";
 			return conn.Query<UMSUser>(sql, new { Email = email, Password = password }).FirstOrDefault();
 		}
+        // end user functions
 
-		public void SaveAnnounce(EMAnnounce objAnnounce)
+        public void SaveAnnounce(EMAnnounce objAnnounce)
 		{
 			string sql = "";
 			if (objAnnounce.AnnounceID == 0)
@@ -111,6 +117,7 @@ namespace EMS.Data
 			sql += " ORDER BY AnnounceID DESC";
 			return conn.Query<EMAnnounce>(sql).ToList();
 		}
+
 
 		public List<EMEventType> GetEventType(int id = 0)
 		{

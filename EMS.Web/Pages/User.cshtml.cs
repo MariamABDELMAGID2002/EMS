@@ -32,8 +32,12 @@ namespace EMS.Web.Pages
 				return RedirectToPage("/Sign");
 			var db = new EMService(config.GetConnectionString("emdb"));
 
-			if (string.IsNullOrEmpty(chk))
+            EventTypes = db.GetEventType();
+            UserInterest = db.GetInterest(userid);
+
+            if (string.IsNullOrEmpty(chk))
 			{
+				
 				return Page();
 			}
 			string[] ids = chk.Split(',');
