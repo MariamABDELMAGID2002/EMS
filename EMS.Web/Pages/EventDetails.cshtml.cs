@@ -1,4 +1,5 @@
 using EMS.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -37,6 +38,24 @@ namespace EMS.Web.Pages
 			Forecast = await weatherService.GetWeatherAsync(double.Parse(Event.latitude),double.Parse(Event.longitude));
 
 			
+		}
+		public async Task OnPostAsync(int id)
+		{
+			string cart = HttpContext.Session.GetString("cart")??"";
+			cart += "," + id;
+			HttpContext.Session.SetString("cart",cart);
+
+			adminPath = config.GetValue<string>("ApiEvents");
+			EMService db = new EMService(config.GetConnectionString("emdb"));
+			Event = (await eventService.GetEventsAsync(eventid: id)).FirstOrDefault();
+			if (Event == null)
+			{
+				RedirectToPage("/Index");
+			}
+			EventType = db.GetEventType(Event.EventTypeID.Value).FirstOrDefault();
+
+			Forecast = await weatherService.GetWeatherAsync(double.Parse(Event.latitude), double.Parse(Event.longitude));
+
 		}
 	}
 }

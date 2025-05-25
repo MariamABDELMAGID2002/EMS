@@ -74,6 +74,7 @@ namespace EMS.Data
 		public virtual string EventName { get; set; }
 		public virtual string TicketType { get; set; }
 
+
 	}
 	public class EMTicketType
 	{
@@ -100,6 +101,20 @@ namespace EMS.Data
 		public bool Approved { get; set; }
 		public DateTime? RegisterDate { get; set; }
 		public bool IsAdmin { get; set; }
+
+	}
+
+	public class VWItem
+	{
+		public int EventID { get; set; }
+		public string Title { get; set; }
+		public int PriceID { get; set; }
+		public int? TicketTypeID { get; set; }
+		public double? Price { get; set; }
+		public int? UnitCount { get; set; }
+		public int? MaxQuota { get; set; }
+		public int? AvailableQuota { get; set; }
+		
 
 	}
 }

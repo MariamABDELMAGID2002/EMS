@@ -36,45 +36,48 @@
                 <div class="td-schedule-details-form">
                     <form action="#">
                         
-                            <table class="table table-bordered table-striped table-hover">
-                                <tr>
-                                    <th>Event</th>
-                                    <th>Ticket Type</th>
-                                    <th>Price</th>
-                                    <th>Count</th>
-                                    <th>Total</th>
-                                </tr>
-                                <tr>
-                                    <td>Event 1</td>
+                        <table class="table table-bordered table-striped table-hover">
+                            <tr>
+                                <th>Event</th>
+                                <th>Quota</th>
+                                <th>Ticket Type</th>
+                                <th>Price</th>
+                                <th>Count</th>
+                                <th>Total</th>
+                            </tr>
+                            @foreach(var citem in Model.CartItems)
+                            {
+                            <tr>
+                                    <td>@citem.Title</td>
+                                    <td>@citem.AvailableQuota / @citem.MaxQuota</td>
                                     <td>
-                                        <select class="select  item-first">
-                                            <option>Silver Pass</option>
-                                            <option>Hotel</option>
-                                            <option>Resort</option>
-                                            <option>Apartments</option>
-                                        </select>
-                                    </td>
-                                <td class="text-center">120</td>
-                                <td class="text-center">
-                                        <div class="td-schedule-details-quantity d-inline-block">
-                                            <span class="increment">
-                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.21924 7H13.3836" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M7.30176 13V1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </span>
-                                            <input class="td-quantity-input" type="text" value="1">
-                                            <span class="decrement">
-                                                <svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 1H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </td>
-                                <td class="text-center">230</td>
+                                            <select asp-items="Model.TicketType" asp-for="@citem.TicketTypeID" class="form-control form-control-sm">
+                                                <option value="0">Event Type</option>
+                                            </select>
                                     
-                                </tr>
-                            </table>
+                                    </td>
+                            <td class="text-center">@citem.PriceID</td>
+                            <td class="text-center">
+                                    <div class="td-schedule-details-quantity d-inline-block">
+                                        <span class="increment">
+                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.21924 7H13.3836" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M7.30176 13V1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                        <input class="td-quantity-input" type="text" value="1">
+                                        <span class="decrement">
+                                            <svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </td>
+                            <td class="text-center">230</td>
+                                    
+                            </tr>
+                            }
+                        </table>
 
                         
                         
@@ -83,11 +86,22 @@
                             <ul>
                                 <li>
                                     <span class="quantity">Quantity:</span>
-                                    <span>02</span>
+                                    <span>0</span>
                                 </li>
                                 <li>
                                     <span class="quantity">Total Cost:</span>
-                                    <span>$58.00</span>
+                                    <span>$0</span>
+                                </li>
+                                <li>
+                                    <select name="paymethod" class="form-control form-control-sm">
+                                        <option value="0" selected>Payment Method</option>
+                                        <option value="Cash" selected>Cash</option>
+                                        <option value="Visa" selected>Visa</option>
+                                        <option value="transfer" selected>transfer</option>
+                                        <option value="wallet" selected>wallet</option>
+                                        <option value="PayPal" selected>PayPal</option>
+
+                                    </select>
                                 </li>
                             </ul>
                         </div>

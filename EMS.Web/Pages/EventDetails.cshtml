@@ -42,7 +42,7 @@
                         <p>
                             @objevent.Description
                         </p>
-                        
+
                     </div>
 
                 </div>
@@ -53,7 +53,7 @@
                         <h3 class="td-schedule-team-title mb-15">Weather Data</h3>
                         <span class="td-schedule-team-border mb-15"></span>
                         <div class="td-schedule-details-info-list">
-                            
+
                             @if (Model.Forecast != null && Model.Forecast.Current != null)
                             {
                                 <div class="weather-info">
@@ -67,8 +67,8 @@
                             {
                                 <p>Unable to load weather data.</p>
                             }
-                            
-                            
+
+
                         </div>
                     </div>
                 </div>
@@ -99,10 +99,18 @@
                                     <span class="ceta">Quota:</span>
                                     <span>@objevent.AvailableQuota / @objevent.MaxQuota  </span>
                                 </li>
-                                
+
                             </ul>
                             <div class="td-schedule-details-total-btn mb-35">
-                                <button type="submit" class="td-btn w-100">Purcshae Now</button>
+                                <form method="post">
+                                    @{
+                                        string[] strAdded = (HttpContext.Session.GetString("cart") ?? "").Split(",");
+                                        string disabled = strAdded.Where(a => a.Equals(objevent.EventID.ToString())).Count() > 0 ? "disabled" : "";
+
+                                    }
+                                    <input type="hidden" name="id" value="@objevent.EventID" />
+                                    <button type="submit" @disabled class="td-btn w-100">Purcshae Now</button>
+                                </form>
                             </div>
                         </div>
                     </div>
