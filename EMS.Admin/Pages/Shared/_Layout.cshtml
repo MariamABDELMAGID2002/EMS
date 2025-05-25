@@ -4,14 +4,14 @@
 @{
     var userName = HttpContextAccessor.HttpContext?.Session.GetString("UserName");
 
-            // <script>
-            // @if (string.IsNullOrEmpty(userName))
-            // {
-            //     <text>
-            //          window.location.href = '@Url.Page("/Login")';
-            //     </text>
-            // }
-            // </script>
+            <script>
+            @if (string.IsNullOrEmpty(userName))
+            {
+                <text>
+                     window.location.href = '@Url.Page("/Login")';
+                </text>
+            }
+            </script>
 }
 
 <!DOCTYPE html>
