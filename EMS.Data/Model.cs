@@ -73,6 +73,12 @@ namespace EMS.Data
 		public int? UnitCount { get; set; }
 		public virtual string EventName { get; set; }
 		public virtual string TicketType { get; set; }
+		public virtual int EventID { get; set; }
+		public virtual int TicketTypeID { get; set; }
+		public virtual int MaxQuota { get; set; }
+		public virtual int AvailableQuota { get; set; }
+		public virtual double TotalPrice{ get; set; }
+
 
 
 	}
@@ -104,17 +110,5 @@ namespace EMS.Data
 
 	}
 
-	public class VWItem
-	{
-		public int EventID { get; set; }
-		public string Title { get; set; }
-		public int PriceID { get; set; }
-		public int? TicketTypeID { get; set; }
-		public double? Price { get; set; }
-		public int? UnitCount { get; set; }
-		public int? MaxQuota { get; set; }
-		public int? AvailableQuota { get; set; }
-		
 
-	}
 }

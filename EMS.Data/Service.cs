@@ -240,6 +240,13 @@ namespace EMS.Data
 
 			return generalPrice;
 		}
+
+		public EMEventPrice GetTicketPrice(int type,int eventid)
+		{
+			string sql = $"SELECT  * FROM dbo.EMEventPrice WHERE (TicketTypeID = {type}) AND (EventID = {eventid})";
+			return conn.Query<EMEventPrice>(sql).ToList().FirstOrDefault()??new EMEventPrice();
+			
+		}
 		public void DeleteEventPrice(int id)
 		{
 			string sql = "delete from EMEventPrice where PriceID = " + id;
@@ -254,6 +261,29 @@ namespace EMS.Data
 			sql += " ORDER BY OrderID DESC";
 			return conn.Query<EMOrder>(sql).ToList();
 		}
+		public void SaveOrder(EMOrder order)
+		{
+			string sql = "";
+			if (order.OrderID == 0)
+
+				sql = "INSERT INTO EMOrder (UserID,OrderDate,TotalAmount,PaymentMethod) VALUES (@UserID,@OrderDate,@TotalAmount,@PaymentMethod) ";
+			else
+				sql = "Update EMOrder  set UserID=@UserID,OrderDate=@OrderDate,TotalAmount@TotalAmount,PaymentMethod=@PaymentMethod  where OrderID = @OrderID ";
+
+			conn.Execute(sql, order);
+			if (order.OrderID == 0)
+				order.OrderID= conn.ExecuteScalar<int>("select max(orderid) from EMorder");
+		}
+		public void SaveOrderItem(EMOrderItem item)
+		{
+			string sql = "";
+
+				sql = "INSERT INTO EMOrderItem(OrderID,PriceID,UnitPrice,UnitCount) VALUES (@OrderID,@PriceID,@UnitPrice,@UnitCount)";
+			
+			conn.Execute(sql, item);
+			if (item.ItemID == 0)
+				item.ItemID= conn.ExecuteScalar<int>("select max(itemid) from EMorderItem");
+		}
 		public List<EMOrderItem> GetOrderItem(int id = 0)
 		{
 			string sql = $@"SELECT TOP (100) PERCENT dbo.EMEvent.Title AS EventName, dbo.EMTicketType.TypeName AS TicketType, dbo.EMOrderItem.UnitPrice, dbo.EMOrderItem.UnitCount
@@ -264,6 +294,18 @@ namespace EMS.Data
 				WHERE        (dbo.EMOrderItem.OrderID = {id})
 				ORDER BY dbo.EMOrderItem.ItemID ";
 			
+			return conn.Query<EMOrderItem>(sql).ToList();
+		}
+		public List<EMOrderItem> GetCartItem(int eid = 0)
+		{
+			string sql = $@"SELECT TOP (100) PERCENT dbo.EMEvent.Title AS EventName, dbo.EMTicketType.TypeName AS TicketType, dbo.EMOrderItem.UnitPrice, dbo.EMOrderItem.UnitCount
+				FROM dbo.EMOrderItem INNER JOIN
+										dbo.EMEventPrice ON dbo.EMOrderItem.PriceID = dbo.EMEventPrice.PriceID INNER JOIN
+				dbo.EMEvent ON dbo.EMEventPrice.EventID = dbo.EMEvent.EventID INNER JOIN
+				dbo.EMTicketType ON dbo.EMEventPrice.TicketTypeID = dbo.EMTicketType.TicketTypeID
+				WHERE        (dbo.EMOrderItem.OrderID = {eid})
+				ORDER BY dbo.EMOrderItem.ItemID ";
+
 			return conn.Query<EMOrderItem>(sql).ToList();
 		}
 		public void DeleteOrder(int id)

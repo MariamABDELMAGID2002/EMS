@@ -1,7 +1,9 @@
 using EMS.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EMS.Web.Pages
 {
@@ -10,11 +12,12 @@ namespace EMS.Web.Pages
 		private readonly IConfiguration config;
 
 		[BindProperty]
-		public List<VWItem> CartItems { get; set; }
-		public EMEvent Event { get; set; }
+		public EMOrder Order { get; set; }
+		[BindProperty]
+		public List<EMOrderItem> CartItems { get; set; }
 		public List<EMEventPrice> EventPrices { get; set; }
 		public SelectList TicketType { get; set; }
-		public string Err { get; set; } = "";
+
 		public CartModel(IConfiguration _configuration)
 		{
 			config = _configuration;
@@ -22,32 +25,37 @@ namespace EMS.Web.Pages
 
 		public IActionResult OnGet()
 		{
-
+			int userid = HttpContext.Session.GetInt32("UserID") ?? 0;
+			if (userid == 0)
+			{
+				RedirectToPage("Sign");
+			}
 			EMService db = new EMService(config.GetConnectionString("emdb"));
 			string[] ids = (HttpContext.Session.GetString("cart")??"").Split(",");
 			if(ids.Length==0)
 				return Page();
-			CartItems = new List<VWItem>();
-			
+			CartItems = new List<EMOrderItem>();
+			Order = new EMOrder();
 			foreach (string sid in ids)
 			{
 				int.TryParse(sid, out int eid);
 				if (eid == 0)
 					continue;
 
-				Event = db.GetEvent(eid).FirstOrDefault();
+				var Event = db.GetEvent(eid).FirstOrDefault();
 				if (Event == null)
 					continue;
 
-				VWItem item = new VWItem();
+				EMOrderItem item = new EMOrderItem();
 				item.EventID = Event.EventID;
-				item.Title = Event.Title;
-				item.Price = 0;
+				item.EventName = Event.Title;
+				item.PriceID = 0;
+				item.UnitPrice = 0;
 				item.TicketTypeID = 0;
-				item.Price = 0;
-				item.UnitCount = 0;
-				item.MaxQuota = Event.MaxQuota;
-				item.AvailableQuota = Event.AvailableQuota;
+				item.TotalPrice = 0;
+				item.UnitCount = 1;
+				item.MaxQuota = Event.MaxQuota.Value;
+				item.AvailableQuota = item.MaxQuota;
 				CartItems.Add(item);
 
 			}
@@ -58,59 +66,42 @@ namespace EMS.Web.Pages
 
 			return Page();
 		}
-		//public ActionResult OnPost()
-		//{
 
-		//	EMService db = new EMService(config.GetConnectionString("emdb"));
-		//	if (Event.EventID != 0)
-		//		Event.UpdatedAt = DateTime.Now;
-		//	else
-		//		Event.CreatedAt = DateTime.Now;
+		public ActionResult OnPost(string hchange)
+		{
+			EMService db = new EMService(config.GetConnectionString("emdb"));
+			TicketType = new SelectList(db.GetTicketType(), "TicketTypeID", "TypeName");
+			Order.TotalAmount = 0;
+			foreach (var item in CartItems)
+			{
+				var price= db.GetTicketPrice(item.TicketTypeID, item.EventID);
+				item.UnitPrice = price.Price;
+				item.PriceID=price.PriceID;
+				item.TotalPrice = (item.UnitPrice ?? 0) * (item.UnitCount ?? 0);
+				item.AvailableQuota = item.AvailableQuota - item.UnitCount ?? 0;
+				Order.TotalAmount += item.TotalPrice;
+				
 
-		//	db.SaveEvent(Event);
-		//	foreach (var price in EventPrices)
-		//	{
-		//		price.EventID = Event.EventID;
-		//		db.SaveEventPrice(price);
-		//	}
-		//	if (upFile != null && upFile.Length > 0)
-		//	{
-		//		var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "upload", "e" + Event.EventID + ".jpg");
-		//		using (var fileStream = new FileStream(filePath, FileMode.Create))
-		//		{
-		//			upFile.CopyTo(fileStream);
-		//		}
-		//	}
+			}
+
+			if (hchange == "0")
+			{
+				Order.UserID = HttpContext.Session.GetInt32("UserID") ?? 0;
+				Order.OrderDate = DateTime.Now;
+				db.SaveOrder(Order);
+				foreach (var item in CartItems)
+				{
+					item.OrderID = Order.OrderID;
+					db.SaveOrderItem(item);
+				}
+			}
+			return Page();
+			
+		}
+		
 
 
-		//	Events = db.GetEvent();
-		//	return RedirectToPage("Event", new
-		//	{
-		//		Act = (int?)null,
-		//	});
-		//}
-		//public ActionResult OnPostDelete()
-		//{
+		
 
-		//	EMService db = new EMService(config.GetConnectionString("emdb"));
-		//	int.TryParse(Act, out int id);
-
-		//	int usedCount = db.GetUsedCount(EMService.UsedTypes.events, id);
-		//	if (usedCount > 0)
-		//	{
-		//		TempData["Err"] = $"Can't delete this event because the event or one of its prices used {usedCount} times";
-		//		return RedirectToPage("Event", new
-		//		{
-		//			Act = (int?)null,
-		//		});
-		//	}
-		//	db.DeleteEvent(id);
-		//	Events = db.GetEvent();
-
-		//	return RedirectToPage("Event", new
-		//	{
-		//		Act = (int?)null,
-		//	});
-		//}
 	}
 }
